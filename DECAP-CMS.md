@@ -62,6 +62,28 @@ If your default branch is `master` or something else, update `branch` to match b
 
 ## First-time invite flow
 
+### Fix Identity email links (important)
+
+Netlify’s default email templates send users to your **homepage** (`/#recovery_token=…`). The Identity widget only runs on **`/admin`**, so password reset and invite links appear to do nothing.
+
+**Option A — Use your link now (immediate):**  
+Change the URL in the browser from:
+
+`https://hodawellnessgroup.netlify.app/#recovery_token=…`
+
+to:
+
+`https://hodawellnessgroup.netlify.app/admin/#recovery_token=…`
+
+**Option B — Fix templates in Netlify (permanent):**
+
+1. Go to **Project configuration → Access & security → Visitors access → Identity → Emails**.
+2. For **Invitation**, **Confirmation**, and **Recovery** templates, find links that use `{{ siteURL }}/#…`.
+3. Change them to `{{ siteURL }}/admin/#…` (add `/admin` before the `#`).
+4. Save each template.
+
+After the next deploy, the site also auto-redirects Identity tokens from the homepage to `/admin`.
+
 ### For the site owner (you)
 
 1. Deploy the site with Identity and Git Gateway enabled (steps above).
