@@ -1,0 +1,26 @@
+# HODA Wellness Group
+> Integrated wellness practice combining functional medicine, nutrition, and movement coaching for durable aging in Allen, TX.
+
+## About
+HODA Wellness Group offers personalized, evidence-informed programs that integrate metabolic health, nutrition, physical resilience, and nervous system regulation. We help clients live stronger, longer, and better at every stage of life.
+
+## Team
+- Olga Rubanov — Founder, Functional Medicine & Polyvagal Theory
+- Anna Rabinovich, DNP, APRN — Nurse Practitioner, Endocrinology & Diabetes
+- Eugenia Kobylatsky, M.Sc. — Registered Dietitian, Disease Prevention & Nutrition
+- Jack Johnston — Personal Trainer, Longevity & Movement Optimization
+
+## Programs
+- [6-Week Optimization Program](/programs/6-week-optimization) — Intensive reset with labs, coaching, and CGM
+- [VIP Coaching](/programs/vip-coaching) — Ongoing high-touch coaching and accountability
+- [Workshops & Seminars](/programs/workshops-seminars) — Expert-led group sessions on wellness topics
+- [Corporate Wellness](/programs/corporate-wellness) — Custom programs for organizations
+
+## Blog
+- [HODA Wellness Blog](/blog) — Articles on functional medicine, metabolic health, and healthy living
+
+## Contact
+- Address: 123 Wellness Way, Allen, TX 75002
+- Phone: (310) 555-1234
+- Email: info@hodawellness.com
+- [Book a consultation](/contact)

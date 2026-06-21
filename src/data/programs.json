@@ -1,0 +1,64 @@
+{
+  "programs": [
+    {
+      "id": "6-week-optimization",
+      "title": "6-Week Optimization Program",
+      "shortDescription": "An intensive 6-week reset combining lab testing, nutrition coaching, and movement programming to kickstart durable change.",
+      "duration": "6 weeks",
+      "format": "1:1 + group sessions",
+      "image": "images/6-week-program.jpg",
+      "highlights": [
+        "Comprehensive baseline lab panel",
+        "Weekly 1:1 coaching calls",
+        "Personalized nutrition & training plan",
+        "CGM trial week"
+      ],
+      "fullDescription": "The 6-Week Optimization Program is our flagship intensive — designed for people who want a focused, measurable reset across all four pillars: nutrition, metabolic health, physical resilience, and nervous system regulation. You'll start with a comprehensive lab panel and baseline assessment so we understand exactly where you are today.\n\nFrom there, your coach builds a personalized plan covering nutrition, training, sleep, and stress. You'll meet 1:1 every week, with a one-week CGM trial mid-program so we can see — in real data — how your body responds to your current habits and adjust in real time.\n\nThis program is ideal for clients who want clear structure, accountability, and a measurable before/after — and who are ready to invest six focused weeks into building habits that last."
+    },
+    {
+      "id": "vip-coaching",
+      "title": "VIP Coaching",
+      "shortDescription": "Ongoing, high-touch coaching for clients who want continuous support, accountability, and access to the full HODA team.",
+      "duration": "Ongoing (monthly)",
+      "format": "1:1, unlimited messaging",
+      "image": "images/vip-coaching.jpg",
+      "highlights": [
+        "Unlimited coach messaging",
+        "Monthly lab review",
+        "Quarterly in-depth reassessment",
+        "Priority scheduling"
+      ],
+      "fullDescription": "VIP Coaching is for clients who want HODA in their corner every day. You'll have unlimited messaging access to your coach, monthly lab reviews, and quarterly in-depth reassessments so your plan evolves with your body, your goals, and your season of life.\n\nVIP clients also get priority scheduling across our specialists — physician, strength coach, nutrition coach, and nervous system specialist — so getting the right answer fast is never the bottleneck.\n\nThis is the right fit for high-performers, executives, and parents who want ongoing accountability and access without rebooking a new program every quarter."
+    },
+    {
+      "id": "workshops-seminars",
+      "title": "Workshops & Seminars",
+      "shortDescription": "Group sessions on specific topics — sleep, stress resilience, metabolic health, and more — open to the community.",
+      "duration": "1-3 hours, varies",
+      "format": "Group, in-person or virtual",
+      "image": "images/workshops.jpg",
+      "highlights": [
+        "Expert-led sessions",
+        "Live Q&A",
+        "Take-home resource guide",
+        "Open to non-clients"
+      ],
+      "fullDescription": "Our Workshops & Seminars are focused, expert-led sessions on the topics our clients ask about most: sleep, stress resilience, metabolic health, strength after 40, hormone changes, and more. Each session combines clear science with practical, take-home strategies.\n\nWorkshops run 1–3 hours depending on the topic, with live Q&A and a downloadable resource guide for every attendee. We offer both in-person and virtual formats.\n\nWorkshops are open to non-clients — they're a great way to explore the HODA approach before committing to a full program."
+    },
+    {
+      "id": "corporate-wellness",
+      "title": "Corporate Wellness",
+      "shortDescription": "Bring HODA's integrated approach to your team — workshops, assessments, and ongoing programs for organizations.",
+      "duration": "Custom",
+      "format": "Group + 1:1 options",
+      "image": "images/corporate.jpg",
+      "highlights": [
+        "Custom program design",
+        "On-site or virtual delivery",
+        "Group + individual options",
+        "Outcome reporting for HR"
+      ],
+      "fullDescription": "Corporate Wellness brings the full HODA approach to your team. We design custom programs for organizations — combining group workshops, individual assessments, and ongoing coaching tracks for employees who want deeper support.\n\nDelivery is flexible: on-site at your office, virtual across distributed teams, or a hybrid of both. Programs are scoped to your goals — reducing burnout, improving energy and focus, supporting executive performance, or building a longer-term culture of health.\n\nWe also provide aggregate outcome reporting so HR and leadership can see the impact, while individual employee data stays private."
+    }
+  ]
+}

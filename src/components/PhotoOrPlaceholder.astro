@@ -1,0 +1,27 @@
+---
+import { isImagePath } from '../utils/images';
+import OptimizedImage from './OptimizedImage.astro';
+
+interface Props {
+  image?: string;
+  alt?: string;
+  extraClass?: string;
+  width?: number;
+  height?: number;
+}
+
+const { image, alt = '', extraClass = '', width = 800, height = 450 } = Astro.props;
+const cls = `ph${extraClass ? ` ${extraClass}` : ''}`;
+---
+
+{
+  isImagePath(image) ? (
+    <div class={`${cls} ph--photo`}>
+      <OptimizedImage src={image!} alt={alt} width={width} height={height} />
+    </div>
+  ) : (
+    <div class={cls} role="img" aria-label={image || ''}>
+      {image}
+    </div>
+  )
+}

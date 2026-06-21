@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Serve Decap CMS admin (static index.html + config.yml in public/admin/)
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200

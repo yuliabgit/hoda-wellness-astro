@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import { isImagePath } from '../utils/images';
+import { isPublicUpload, resolveAssetImage } from '../utils/assetImages';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+  fetchpriority?: 'high' | 'low' | 'auto';
+  quality?: number;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  loading = 'lazy',
+  class: className,
+  fetchpriority,
+  quality = 75,
+} = Astro.props;
+
+const publicSrc = src.startsWith('/') ? src : `/${src}`;
+const asset = !isPublicUpload(src) ? resolveAssetImage(src) : undefined;
+---
+
+{
+  asset ? (
+    <Image
+      src={asset}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      class={className}
+      fetchpriority={fetchpriority}
+      decoding="async"
+      quality={quality}
+    />
+  ) : isImagePath(src) ? (
+    <img
+      src={publicSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      class={className}
+      fetchpriority={fetchpriority}
+      decoding="async"
+    />
+  ) : null
+}

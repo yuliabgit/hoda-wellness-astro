@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import programs from '../data/programs.ts';
+import { absoluteUrl, getSiteUrl } from '../utils/seo';
+
+const site = getSiteUrl(Astro.site);
+const title = 'Contact HODA Wellness Group — Book a Consultation';
+const description =
+  'Contact HODA Wellness Group in Allen, TX to book a wellness consultation. Ask a question or start your personalized health optimization plan.';
+
+const localBusinessSchema = {
+  '@type': 'LocalBusiness',
+  name: 'HODA Wellness Group',
+  url: absoluteUrl('/contact', site),
+  image: absoluteUrl('/og-default.jpg', site),
+  telephone: '+1-310-555-1234',
+  email: 'info@hodawellness.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '123 Wellness Way',
+    addressLocality: 'Allen',
+    addressRegion: 'TX',
+    postalCode: '75002',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 33.1032,
+    longitude: -96.6706,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '09:00',
+      closes: '13:00',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical={absoluteUrl('/contact', site)}
+  activeNav="contact"
+  structuredData={localBusinessSchema}
+>
+  <section class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's Build Your Plan</h1>
+      <p>
+        Have a question or ready to get started? Send us a message and a member of our
+        team will get back to you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--bg" style="padding-top: 32px;">
+    <div class="container">
+      <div class="contact-layout">
+        <div>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="field">
+              <label for="cf-name">Name <span class="required">*</span></label>
+              <input id="cf-name" name="name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="cf-email">Email <span class="required">*</span></label>
+              <input id="cf-email" name="email" type="email" required />
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone</label>
+              <input id="cf-phone" name="phone" type="tel" />
+            </div>
+            <div class="field">
+              <label for="program-interest">Interested Program</label>
+              <select id="program-interest" name="program">
+                <option value="general">General Inquiry</option>
+                {
+                  programs.map((p) => (
+                    <option value={p.id}>{p.title}</option>
+                  ))
+                }
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message <span class="required">*</span></label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">Send Message</button>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <h3>Visit Us</h3>
+          <div class="ph ph--map" role="img" aria-label="[IMAGE: map placeholder]">
+            [IMAGE: map placeholder]
+          </div>
+
+          <div class="info-block">
+            <strong>Address</strong>
+            <p>123 Wellness Way<br />Allen, TX 75002</p>
+          </div>
+          <div class="info-block">
+            <strong>Phone</strong>
+            <p><a href="tel:+13105551234">(310) 555-1234</a></p>
+          </div>
+          <div class="info-block">
+            <strong>Email</strong>
+            <p><a href="mailto:info@hodawellness.com">info@hodawellness.com</a></p>
+          </div>
+          <div class="info-block">
+            <strong>Hours</strong>
+            <p>Mon–Fri: 8am–6pm<br />Sat: 9am–1pm<br />Sun: Closed</p>
+          </div>
+
+          <div class="socials">
+            <a href="#" aria-label="Instagram">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle
+                  cx="12"
+                  cy="12"
+                  r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"
+                ></circle></svg
+              >
+            </a>
+            <a href="#" aria-label="Facebook">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path
+                  d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                ></path></svg
+              >
+            </a>
+            <a href="#" aria-label="LinkedIn">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect x="3" y="3" width="18" height="18" rx="2"></rect><line
+                  x1="8"
+                  y1="10"
+                  x2="8"
+                  y2="17"></line><circle cx="8" cy="7" r="1"></circle><path
+                  d="M12 17v-4a2 2 0 0 1 4 0v4"></path><line x1="12" y1="10" x2="12" y2="17"
+                ></line></svg
+              >
+            </a>
+            <a href="mailto:info@hodawellness.com" aria-label="Email">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline
+                  points="3 7 12 13 21 7"></polyline></svg
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const wrap = form.parentNode;
+      if (!wrap) return;
+
+      const success = document.createElement('div');
+      success.className = 'contact-success';
+      success.innerHTML =
+        '<h3>Thanks — we\'ll be in touch within 1 business day.</h3>' +
+        '<p>A member of our team will reach out to schedule a conversation.</p>' +
+        '<a href="#" id="send-another">Send another message</a>';
+      wrap.replaceChild(success, form);
+
+      const again = success.querySelector('#send-another');
+      if (again) {
+        again.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          form.reset();
+          wrap.replaceChild(form, success);
+        });
+      }
+    });
+  }
+</script>

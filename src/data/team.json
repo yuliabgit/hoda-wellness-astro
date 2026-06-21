@@ -1,0 +1,92 @@
+{
+  "members": [
+    {
+      "id": "olga-rubanov",
+      "name": "Olga Rubanov",
+      "title": "Founder",
+      "specialty": "Functional Medicine & Polyvagal Theory",
+      "image": "images/team/olga.png",
+      "initials": "OR",
+      "founder": true,
+      "shortBio": "Founder of HODA Wellness Group. Doctoral candidate in Functional Medicine, specializing in Polyvagal Theory and the Focusing technique.",
+      "fullBio": "With nearly three decades of executive leadership experience in technology and consulting, Olga is also a doctoral candidate in Functional Medicine, has studied Polyvagal Theory and its applications, and specializes in the Focusing technique.\n\nShe is passionate about practicing the same principles she teaches to support long-term vitality and well-being.",
+      "credentials": [
+        "Doctoral candidate in Functional Medicine",
+        "Trained in Polyvagal Theory and its applications",
+        "Specialist in the Focusing technique"
+      ],
+      "focusAreas": [
+        "Functional medicine foundations",
+        "Polyvagal Theory & nervous system regulation",
+        "The Focusing technique",
+        "Long-term vitality & well-being"
+      ]
+    },
+    {
+      "id": "anna-rabinovich",
+      "name": "Anna Rabinovich, DNP, APRN, ANP-BC, CDCES",
+      "title": "Nurse Practitioner",
+      "specialty": "Endocrinology, Diabetes & Primary Care",
+      "image": "images/team/anna.png",
+      "initials": "AR",
+      "founder": false,
+      "shortBio": "Board-certified Adult Nurse Practitioner with two decades of experience across endocrinology, diabetes management, and primary care.",
+      "fullBio": "Anna is a board-certified Adult Nurse Practitioner with two decades of experience in endocrinology, diabetes management, and primary care, practicing across hospital, clinic, and telehealth settings.\n\nShe specializes in managing complex chronic conditions through a holistic, patient-centered approach and the integration of advanced technologies.",
+      "credentials": [
+        "DNP — Doctor of Nursing Practice",
+        "APRN, ANP-BC — Board-certified Adult Nurse Practitioner",
+        "CDCES — Certified Diabetes Care and Education Specialist"
+      ],
+      "focusAreas": [
+        "Endocrinology & hormonal health",
+        "Diabetes management",
+        "Primary care across settings",
+        "Holistic, patient-centered chronic care"
+      ]
+    },
+    {
+      "id": "eugenia-kobylatsky",
+      "name": "Eugenia Kobylatsky, M.Sc.",
+      "title": "Registered Dietitian",
+      "specialty": "Disease Prevention & Sustainable Nutrition",
+      "image": "images/team/eugenia.png",
+      "initials": "EK",
+      "founder": false,
+      "shortBio": "Registered Dietitian and author of 4 books on nutrition and weight management, with two decades of experience.",
+      "fullBio": "Eugenia is the author of 4 books on nutrition and weight management, with two decades of experience as a Registered Dietitian.\n\nShe specializes in disease prevention, cardiovascular health, type 2 diabetes, and sustainable weight control — translating complex scientific research into practical, personalized nutrition that fits everyday meals.",
+      "credentials": [
+        "M.Sc. in Nutrition",
+        "Registered Dietitian",
+        "Author of 4 books on nutrition and weight management"
+      ],
+      "focusAreas": [
+        "Disease prevention",
+        "Cardiovascular health",
+        "Type 2 diabetes nutrition",
+        "Sustainable weight control"
+      ]
+    },
+    {
+      "id": "jack-johnston",
+      "name": "Jack Johnston",
+      "title": "Personal Trainer",
+      "specialty": "Longevity, Performance & Movement Optimization",
+      "image": "images/team/jack.png",
+      "initials": "JJ",
+      "founder": false,
+      "shortBio": "NASM-Certified Personal Trainer with 20+ years in fitness, performance, and corrective exercise.",
+      "fullBio": "Jack has over 20 years of experience in fitness, performance, and corrective exercise.\n\nSpecializing in longevity-focused training, human performance, and movement optimization, he helps clients build strength, improve function, and achieve sustainable long-term results through evidence-based coaching.",
+      "credentials": [
+        "NASM-Certified Personal Trainer",
+        "20+ years in fitness and performance",
+        "Specialist in corrective exercise"
+      ],
+      "focusAreas": [
+        "Longevity-focused training",
+        "Human performance",
+        "Movement optimization",
+        "Corrective exercise & strength"
+      ]
+    }
+  ]
+}

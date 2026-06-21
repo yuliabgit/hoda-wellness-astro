@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhotoOrPlaceholder from '../components/PhotoOrPlaceholder.astro';
+import programs from '../data/programs.ts';
+
+const title = 'Wellness Programs — 6-Week, VIP, Workshops, Corporate';
+const description =
+  'Explore HODA Wellness Group programs — 6-Week Optimization, VIP Coaching, Workshops & Seminars, and Corporate Wellness built on our four-pillar integrated approach.';
+---
+
+<BaseLayout title={title} description={description} ogImage="/images/6-week-program.jpg" activeNav="programs">
+  <section class="page-intro">
+    <div class="container">
+      <span class="eyebrow">Our Programs</span>
+      <h1>Find the Right Path for You</h1>
+      <p>
+        Every program is built on the same four pillars — nutrition, metabolic health,
+        physical resilience, and nervous system regulation — tailored to different goals,
+        timelines, and levels of support.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--bg">
+    <div class="container">
+      <div class="programs-grid">
+        {
+          programs.map((p) => (
+            <article class="program-card">
+              <PhotoOrPlaceholder image={p.image} alt={p.title} />
+              <div class="program-card__body">
+                <h3>{p.title}</h3>
+                <div class="meta">
+                  {p.duration}
+                  {p.format ? ` · ${p.format}` : ''}
+                </div>
+                <p>{p.shortDescription}</p>
+                <a class="btn btn--ghost" href={`/programs/${p.id}`}>
+                  View Details
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Not Sure Which Program Fits?</h2>
+    <p>Get in touch and we'll help you find the right starting point.</p>
+    <a class="btn btn--warm" href="/contact">Contact Us</a>
+  </section>
+</BaseLayout>

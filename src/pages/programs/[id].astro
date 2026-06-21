@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import OptimizedImage from '../../components/OptimizedImage.astro';
+import programs from '../../data/programs.ts';
+import { isImagePath } from '../../utils/images';
+import { absoluteUrl, getSiteUrl } from '../../utils/seo';
+
+export function getStaticPaths() {
+  return programs.map((program) => ({
+    params: { id: program.id },
+    props: { program },
+  }));
+}
+
+const { program } = Astro.props;
+const site = getSiteUrl(Astro.site);
+const canonicalUrl = absoluteUrl(`/programs/${program.id}`, site);
+const title = `${program.title} | HODA Wellness Group`;
+const description = program.shortDescription;
+const ogImage = program.image?.startsWith('/') ? program.image : `/${program.image}`;
+
+const serviceSchema = {
+  '@type': 'Service',
+  name: program.title,
+  description: program.shortDescription,
+  provider: {
+    '@type': 'Organization',
+    name: 'HODA Wellness Group',
+    url: site.href,
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States',
+  },
+  serviceType: 'Wellness Program',
+  url: canonicalUrl,
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  canonical={canonicalUrl}
+  activeNav="programs"
+  structuredData={serviceSchema}
+>
+  <section class="section section--bg">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/programs">Programs</a> / {program.title}
+      </div>
+      {
+        isImagePath(program.image) ? (
+          <div class="program-detail__hero program-detail__hero--photo">
+            <OptimizedImage
+              src={program.image!}
+              alt={program.title}
+              width={1200}
+              height={525}
+            />
+          </div>
+        ) : (
+          <div
+            class="program-detail__hero"
+            role="img"
+            aria-label={program.image || ''}
+          >
+            {program.image}
+          </div>
+        )
+      }
+      <div class="program-detail">
+        <h1>{program.title}</h1>
+        <div class="meta">
+          {program.duration}
+          {program.format ? ` · ${program.format}` : ''}
+        </div>
+        <div class="body">
+          <p>{program.fullDescription}</p>
+        </div>
+        {
+          program.highlights && program.highlights.length > 0 && (
+            <>
+              <h2>What's Included</h2>
+              <ul class="checklist">
+                {program.highlights.map((h) => (
+                  <li>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      ><polyline points="20 6 9 17 4 12"></polyline></svg
+                    >
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner" style="margin-top: 96px;">
+    <h2>Ready to Get Started with {program.title}?</h2>
+    <p>Tell us a bit about your goals and a member of our team will be in touch.</p>
+    <a class="btn btn--warm" href="/contact">Contact Us</a>
+  </section>
+</BaseLayout>

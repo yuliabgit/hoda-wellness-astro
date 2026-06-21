@@ -1,0 +1,204 @@
+# Decap CMS reads this file from /admin/config.yml when you open the content manager.
+# See DECAP-CMS.md in the project root for Netlify Identity setup and editor onboarding.
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Uncomment for local editing without Netlify (requires: npx decap-server)
+# local_backend: true
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+site_url: https://musical-brioche-e3c8a5.netlify.app
+display_url: https://musical-brioche-e3c8a5.netlify.app
+
+collections:
+  # ── Blog (MDX files) ──────────────────────────────────────────────
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+        hint: Draft posts are hidden from the live site and RSS feed.
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+        pattern: ["^.{1,160}$", "Must be 160 characters or less (SEO meta description)."]
+        hint: Shown in search results, blog cards, and RSS.
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+      - label: Author
+        name: author
+        widget: string
+        default: HODA Wellness Group
+      - label: Hero Image
+        name: heroImage
+        widget: image
+        required: false
+        hint: "Recommended: 1200×525 px landscape. Leave blank for no hero."
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+        field:
+          label: Tag
+          name: tag
+          widget: string
+      - label: Body
+        name: body
+        widget: markdown
+
+  # ── Team (JSON list) ─────────────────────────────────────────────
+  - name: team
+    label: Team
+    files:
+      - label: Team Members
+        name: team
+        file: src/data/team.json
+        format: json
+        fields:
+          - label: Members
+            name: members
+            widget: list
+            summary: "{{fields.name}} — {{fields.title}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+                hint: "URL slug, lowercase with hyphens (e.g. olga-rubanov)."
+              - label: Name
+                name: name
+                widget: string
+              - label: Title
+                name: title
+                widget: string
+              - label: Specialty
+                name: specialty
+                widget: string
+              - label: Photo
+                name: image
+                widget: image
+                hint: Upload a photo or keep an existing /images/ path.
+              - label: Initials
+                name: initials
+                widget: string
+                hint: 2–3 letters; shown if the photo is missing.
+              - label: Founder
+                name: founder
+                widget: boolean
+                default: false
+              - label: Short Bio
+                name: shortBio
+                widget: text
+              - label: Full Bio
+                name: fullBio
+                widget: text
+              - label: Credentials
+                name: credentials
+                widget: list
+                field:
+                  label: Credential
+                  name: credential
+                  widget: string
+              - label: Focus Areas
+                name: focusAreas
+                widget: list
+                field:
+                  label: Focus Area
+                  name: focusArea
+                  widget: string
+
+  # ── Programs (JSON list) ─────────────────────────────────────────
+  - name: programs
+    label: Programs
+    files:
+      - label: Programs
+        name: programs
+        file: src/data/programs.json
+        format: json
+        fields:
+          - label: Programs
+            name: programs
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+                hint: "URL slug (e.g. 6-week-optimization). Used in /programs/[id]."
+              - label: Title
+                name: title
+                widget: string
+              - label: Short Description
+                name: shortDescription
+                widget: text
+              - label: Duration
+                name: duration
+                widget: string
+              - label: Format
+                name: format
+                widget: string
+              - label: Image
+                name: image
+                widget: image
+              - label: Highlights
+                name: highlights
+                widget: list
+                field:
+                  label: Highlight
+                  name: highlight
+                  widget: string
+              - label: Full Description
+                name: fullDescription
+                widget: text
+
+  # ── Announcements (JSON list) ──────────────────────────────────────
+  - name: announcements
+    label: Announcements
+    files:
+      - label: Site Announcement Banner
+        name: announcements
+        file: src/data/announcements.json
+        format: json
+        fields:
+          - label: Announcements
+            name: announcements
+            widget: list
+            max: 3
+            summary: "{{fields.text}}"
+            fields:
+              - label: ID
+                name: id
+                widget: string
+                default: ann-001
+              - label: Active
+                name: active
+                widget: boolean
+                default: true
+                hint: Only one announcement should be active at a time.
+              - label: Message
+                name: text
+                widget: string
+              - label: Link URL
+                name: link
+                widget: string
+                required: false
+                hint: "Internal path, e.g. /contact or /blog/welcome-to-hoda-wellness"
+              - label: Link Text
+                name: linkText
+                widget: string
+                required: false

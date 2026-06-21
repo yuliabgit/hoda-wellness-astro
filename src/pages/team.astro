@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamMemberImage from '../components/TeamMemberImage.astro';
+import team from '../data/team.ts';
+import { absoluteUrl, getSiteUrl } from '../utils/seo';
+
+function bioParagraphs(text: string) {
+  return text
+    .split(/\n\s*\n/)
+    .map((para) => para.replace(/\n/g, '<br>'));
+}
+
+const site = getSiteUrl(Astro.site);
+const title = 'Meet the HODA Team — Functional Medicine Practitioners';
+const description =
+  'Meet the HODA Wellness Group team — functional medicine, nursing, nutrition, and movement specialists working together on your personalized wellness plan.';
+
+const personSchemas = team.map((member) => ({
+  '@type': 'Person',
+  name: member.name,
+  jobTitle: member.title,
+  description: member.shortBio,
+  worksFor: {
+    '@type': 'Organization',
+    name: 'HODA Wellness Group',
+    url: site.href,
+  },
+  knowsAbout: member.focusAreas?.length ? member.focusAreas : [member.specialty],
+  url: absoluteUrl(`/team#${member.id}`, site),
+}));
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage="/images/team/olga.png"
+  activeNav="about"
+  showTeamLink={true}
+  structuredData={personSchemas}
+>
+  <section class="page-intro">
+    <div class="container">
+      <div class="breadcrumb" style="margin-bottom: 16px;">
+        <a href="/about">About</a> / Meet Our Team
+      </div>
+      <span class="eyebrow">Meet Our Team</span>
+      <h1>Experts Who Care</h1>
+      <p>
+        A collaborative team of specialists dedicated to your long-term health. Each
+        member of the HODA team brings deep expertise in one pillar of integrated
+        wellness — and works closely with the others on every client plan.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--bg">
+    <div class="container">
+      <div class="team-roster">
+        {
+          team.map((m) => (
+            <article class="bio" id={m.id}>
+              <div class="bio__media">
+                <TeamMemberImage
+                  image={m.image}
+                  initials={m.initials}
+                  name={m.name}
+                  sizeClass="ph--circle-lg"
+                />
+              </div>
+              <div class="bio__body">
+                <span class="eyebrow">{m.specialty || m.title}</span>
+                <h2>{m.name}</h2>
+                <p class="bio__title">{m.title}</p>
+                <div class="bio__text">
+                  {bioParagraphs(m.fullBio || '').map((para) => (
+                    <p set:html={para} />
+                  ))}
+                </div>
+                <div class="bio__lists">
+                  {m.credentials && m.credentials.length > 0 && (
+                    <div class="bio__list">
+                      <h4>Credentials</h4>
+                      <ul>
+                        {m.credentials.map((c) => (
+                          <li>{c}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {m.focusAreas && m.focusAreas.length > 0 && (
+                    <div class="bio__list">
+                      <h4>Areas of Focus</h4>
+                      <ul>
+                        {m.focusAreas.map((f) => (
+                          <li>{f}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to Work With Our Team?</h2>
+    <p>Let's match you with the right specialists for your goals.</p>
+    <a class="btn btn--warm" href="/contact">Contact Us</a>
+  </section>
+</BaseLayout>
+
+<script>
+  if (window.location.hash) {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target) {
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+</script>

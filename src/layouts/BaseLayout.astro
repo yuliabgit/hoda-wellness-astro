@@ -1,0 +1,321 @@
+---
+import '../styles/global.css';
+import programs from '../data/programs.ts';
+import announcements from '../data/announcements.ts';
+import {
+  absoluteUrl,
+  DEFAULT_OG_IMAGE,
+  getSiteUrl,
+  jsonLdScript,
+  organizationSchema,
+} from '../utils/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  activeNav?: 'home' | 'about' | 'programs' | 'resources' | 'blog' | 'contact';
+  transparentHeader?: boolean;
+  showTeamLink?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = DEFAULT_OG_IMAGE,
+  canonical,
+  activeNav,
+  transparentHeader = false,
+  showTeamLink = false,
+  structuredData,
+  ogType = 'website',
+} = Astro.props;
+
+const site = getSiteUrl(Astro.site);
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site).href;
+const ogImageUrl = absoluteUrl(ogImage, site);
+
+const schemas: Record<string, unknown>[] = [organizationSchema(site)];
+if (structuredData) {
+  const extra = Array.isArray(structuredData) ? structuredData : [structuredData];
+  schemas.push(...extra);
+}
+
+const activeAnnouncement = announcements.find((a) => a.active === true);
+
+function resolveLink(link: string) {
+  return link
+    .replace('contact.html', '/contact')
+    .replace('index.html', '/')
+    .replace('about.html', '/about')
+    .replace('programs.html', '/programs')
+    .replace('team.html', '/team');
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="HODA Wellness Group" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={jsonLdScript(schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas })} />
+  </head>
+  <body>
+    {
+      activeAnnouncement && (
+        <div class="announce" id="announcement" hidden>
+          <div class="announce__inner">
+            {activeAnnouncement.text}
+            {activeAnnouncement.link && activeAnnouncement.linkText && (
+              <>
+                {' '}
+                <a href={resolveLink(activeAnnouncement.link)}>
+                  {activeAnnouncement.linkText} →
+                </a>
+              </>
+            )}
+          </div>
+          <button
+            class="announce__close"
+            type="button"
+            aria-label="Dismiss announcement"
+          >
+            &times;
+          </button>
+        </div>
+      )
+    }
+
+    <header
+      class:list={[
+        'site-header',
+        transparentHeader && 'site-header--transparent',
+      ]}
+    >
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          HODA
+          <span class="brand__sub">Wellness Group</span>
+        </a>
+        <button
+          class="nav__toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <ul class="nav__list">
+          <li>
+            <a
+              class:list={['nav__link', activeNav === 'home' && 'nav__link--active']}
+              href="/"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              class:list={['nav__link', activeNav === 'about' && 'nav__link--active']}
+              href="/about"
+            >
+              About
+            </a>
+          </li>
+          <li>
+            <a
+              class:list={[
+                'nav__link',
+                activeNav === 'programs' && 'nav__link--active',
+              ]}
+              href="/programs"
+            >
+              Programs
+            </a>
+          </li>
+          <li>
+            <a
+              class:list={[
+                'nav__link',
+                activeNav === 'resources' && 'nav__link--active',
+              ]}
+              href="/blog"
+            >
+              Resources
+            </a>
+          </li>
+          <li>
+            <a
+              class:list={['nav__link', activeNav === 'blog' && 'nav__link--active']}
+              href="/blog"
+            >
+              Blog
+            </a>
+          </li>
+          <li>
+            <a
+              class:list={[
+                'nav__link',
+                activeNav === 'contact' && 'nav__link--active',
+              ]}
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+          <li>
+            <a class="btn btn--primary nav__cta" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col footer-brand">
+            <a class="brand" href="/">
+              HODA
+              <span class="brand__sub">Wellness Group</span>
+            </a>
+            <p>Health optimization for stronger, longer, better lives.</p>
+            <p class="copyright">© 2024 HODA Wellness Group. All rights reserved.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              {showTeamLink && <li><a href="/team">Meet Our Team</a></li>}
+              <li><a href="/programs">Programs</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Programs</h4>
+            <ul>
+              {
+                programs.map((p) => (
+                  <li>
+                    <a href={`/programs/${p.id}`}>{p.title}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Let's Connect</h4>
+            <ul>
+              <li><a href="mailto:info@hodawellness.com">info@hodawellness.com</a></li>
+              <li><a href="tel:+13105551234">(310) 555-1234</a></li>
+            </ul>
+            <div class="footer-socials">
+              <a href="#" aria-label="Instagram">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle
+                    cx="12"
+                    cy="12"
+                    r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"
+                  ></circle></svg
+                >
+              </a>
+              <a href="#" aria-label="Facebook">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M15 3h-3a4 4 0 0 0-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path></svg
+                >
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="3" y="3" width="18" height="18" rx="2"></rect><line
+                    x1="8"
+                    y1="10"
+                    x2="8"
+                    y2="17"></line><circle cx="8" cy="7" r="1"></circle><path
+                    d="M12 17v-4a2 2 0 0 1 4 0v4"></path><line x1="12" y1="10" x2="12" y2="17"
+                  ></line></svg
+                >
+              </a>
+              <a href="mailto:info@hodawellness.com" aria-label="Email">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="3" y="5" width="18" height="14" rx="2"></rect><polyline
+                    points="3 7 12 13 21 7"></polyline></svg
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/client.js"></script>
+  </body>
+</html>

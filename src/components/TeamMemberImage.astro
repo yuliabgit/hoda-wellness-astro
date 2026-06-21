@@ -1,0 +1,46 @@
+---
+import { isImagePath } from '../utils/images';
+import OptimizedImage from './OptimizedImage.astro';
+
+interface Props {
+  image?: string;
+  initials?: string;
+  name?: string;
+  sizeClass?: string;
+}
+
+const { image, initials = '', name = '', sizeClass = '' } = Astro.props;
+const cls = `ph ph--circle${sizeClass ? ` ${sizeClass}` : ''}`;
+const fallback = initials.replace(/'/g, "\\'");
+const size = sizeClass.includes('lg') ? 160 : 120;
+---
+
+{
+  isImagePath(image) ? (
+    <div class={`${cls} ph--photo`} data-team-image data-initials={initials}>
+      <OptimizedImage
+        src={image!}
+        alt={name}
+        width={size}
+        height={size}
+        loading="lazy"
+      />
+    </div>
+  ) : (
+    <div class={cls} role="img" aria-label={image || ''}>
+      {initials}
+    </div>
+  )
+}
+
+<script>
+  document.querySelectorAll('[data-team-image]').forEach((wrap) => {
+    const img = wrap.querySelector('img');
+    if (!img) return;
+    img.addEventListener('error', () => {
+      const initials = wrap.getAttribute('data-initials') || '';
+      wrap.classList.add('ph--initials');
+      wrap.innerHTML = initials;
+    });
+  });
+</script>

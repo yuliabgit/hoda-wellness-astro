@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamMemberImage from '../components/TeamMemberImage.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
+import team from '../data/team.ts';
+
+const founder = team.find((m) => m.founder);
+const specialists = team.filter((m) => !m.founder);
+
+const title = 'About HODA Wellness Group — Functional Medicine & Coaching';
+const description =
+  'Learn how HODA Wellness Group combines functional medicine, nutrition, movement, and nervous system regulation into one integrated approach to durable health.';
+---
+
+<BaseLayout title={title} description={description} ogImage="/images/why-hoda.jpg" activeNav="about">
+  <section class="section section--bg" style="padding-top: 96px;">
+    <div class="container">
+      <div class="two-col">
+        <div class="two-col__text">
+          <span class="eyebrow">About HODA</span>
+          <h1>We look at the whole you.</h1>
+          <p>
+            We combine the best of modern science with a deep understanding of behavior
+            change and human biology. Our integrated team works together to help you feel
+            stronger, more energized, and more in control of your health—at every stage
+            of life.
+          </p>
+          <p class="italic" style="color:var(--color-accent);">
+            Evidence-informed. Personalized. Sustainable.
+          </p>
+        </div>
+        <div class="two-col__media">
+          <div class="ph ph--photo ph--aspect-4-3">
+            <OptimizedImage
+              src="/images/why-hoda.jpg"
+              alt="The HODA approach — whole-person health"
+              width={800}
+              height={600}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bg-alt" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Meet Our Team</span>
+        <h2>Experts Who Care</h2>
+        <p>A collaborative team of specialists dedicated to your long-term health.</p>
+      </div>
+
+      {
+        founder && (
+          <div class="team-founder">
+            <a class="team-founder-link" href={`/team#${founder.id}`}>
+              <TeamMemberImage
+                image={founder.image}
+                initials={founder.initials}
+                name={founder.name}
+                sizeClass="ph--circle-lg"
+              />
+              <h3>{founder.name}</h3>
+              <div class="role">{founder.title}</div>
+            </a>
+          </div>
+        )
+      }
+
+      <div class="team-grid">
+        {
+          specialists.map((m) => (
+            <a class="team-card team-card--link" href={`/team#${m.id}`}>
+              <TeamMemberImage image={m.image} initials={m.initials} name={m.name} />
+              <h4>{m.name}</h4>
+              <p class="role">{m.title}</p>
+              <p class="desc">{m.shortBio}</p>
+              <span class="team-card__more">Read bio →</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="center-text" style="margin-top: 56px;">
+        <a class="btn btn--ghost" href="/team">Read Full Bios →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to Take the Next Step?</h2>
+    <p>Your best health is within reach. Let's build your personalized plan.</p>
+    <a class="btn btn--warm" href="/contact">Contact Us</a>
+  </section>
+</BaseLayout>
