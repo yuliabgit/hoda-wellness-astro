@@ -5,7 +5,7 @@ export const DEFAULT_DESCRIPTION =
   'Integrated wellness practice combining functional medicine, personalized nutrition, movement coaching, and nervous system regulation for durable aging.';
 
 export function getSiteUrl(site: URL | string | undefined): URL {
-  return new URL(site ?? 'https://musical-brioche-e3c8a5.netlify.app');
+  return new URL(site ?? 'https://hodawellnessgroup.netlify.app');
 }
 
 export function absoluteUrl(path: string, site: URL): string {

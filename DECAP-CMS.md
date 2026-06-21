@@ -6,7 +6,7 @@ HODA Wellness Group uses [Decap CMS](https://decapcms.org/) so non-technical edi
 
 Once deployed to Netlify, open:
 
-**https://musical-brioche-e3c8a5.netlify.app/admin**
+**https://hodawellnessgroup.netlify.app/admin**
 
 Locally (with `npm run dev` running):
 
@@ -31,14 +31,18 @@ Decap CMS saves changes by committing to your Git repository. On Netlify, that r
 
 ### Step 2 — Enable Netlify Identity
 
-1. In Netlify, open your site → **Site configuration** → **Identity**.
-2. Click **Enable Identity**.
-3. Under **Registration preferences**, choose **Invite only** (recommended). This prevents public sign-ups; only people you invite can access the CMS.
+Netlify renamed this area. You will **not** see a top-level menu item called “Identity” — it lives inside **Visitors access**.
+
+1. In Netlify, open your site → **Project configuration** → **Access & security** → **Visitors access**.
+2. Find the **Identity** card/section and click **Enable Identity**.
+3. Under **Registration → Registration preferences**, choose **Invite only** (recommended). This prevents public sign-ups; only people you invite can access the CMS.
 4. Optional: under **Emails → Invitation template**, customize the invite email text.
+
+**https://app.netlify.com/projects/hodawellnessgroup/configuration/identity**
 
 ### Step 3 — Enable Git Gateway
 
-1. Still under **Identity**, scroll to **Services** → **Git Gateway**.
+1. Still under **Visitors access → Identity**, scroll to **Services** → **Git Gateway**.
 2. Click **Enable Git Gateway**.
 3. Netlify will connect to your repo and allow authenticated Identity users to commit through the CMS.
 
@@ -61,9 +65,9 @@ If your default branch is `master` or something else, update `branch` to match b
 ### For the site owner (you)
 
 1. Deploy the site with Identity and Git Gateway enabled (steps above).
-2. Go to **Site configuration → Identity → Invite users**.
+2. Go to **Project configuration → Access & security → Visitors access → Identity → Invite users**.
 3. Enter the editor’s email address and send the invite.
-4. Tell them to open **https://musical-brioche-e3c8a5.netlify.app/admin** after accepting the invite.
+4. Tell them to open **https://hodawellnessgroup.netlify.app/admin** after accepting the invite.
 
 ### For the invited editor
 

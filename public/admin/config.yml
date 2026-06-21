@@ -11,8 +11,8 @@ backend:
 media_folder: public/images/uploads
 public_folder: /images/uploads
 
-site_url: https://musical-brioche-e3c8a5.netlify.app
-display_url: https://musical-brioche-e3c8a5.netlify.app
+site_url: https://hodawellnessgroup.netlify.app
+display_url: https://hodawellnessgroup.netlify.app
 
 collections:
   # ── Blog (MDX files) ──────────────────────────────────────────────

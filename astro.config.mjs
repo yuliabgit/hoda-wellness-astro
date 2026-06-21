@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://musical-brioche-e3c8a5.netlify.app',
+  site: 'https://hodawellnessgroup.netlify.app',
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
