@@ -64,25 +64,31 @@ If your default branch is `master` or something else, update `branch` to match b
 
 ### Fix Identity email links (important)
 
-Netlify’s default email templates send users to your **homepage** (`/#recovery_token=…`). The Identity widget only runs on **`/admin`**, so password reset and invite links appear to do nothing.
+Netlify’s default emails link to your **homepage** (`/#recovery_token=…`). The Identity widget only runs on **`/admin`**, so reset and invite links appear to do nothing until you point emails at `/admin`.
 
-**Option A — Use your link now (immediate):**  
-Change the URL in the browser from:
-
-`https://hodawellnessgroup.netlify.app/#recovery_token=…`
-
-to:
-
+**Immediate workaround:** add `/admin` before the `#` in the link, e.g.  
 `https://hodawellnessgroup.netlify.app/admin/#recovery_token=…`
 
-**Option B — Fix templates in Netlify (permanent):**
+**Permanent fix (after deploy):** custom templates in this repo link directly to `/admin`. Wire them up in Netlify:
 
-1. Go to **Project configuration → Access & security → Visitors access → Identity → Emails**.
-2. For **Invitation**, **Confirmation**, and **Recovery** templates, find links that use `{{ siteURL }}/#…`.
-3. Change them to `{{ siteURL }}/admin/#…` (add `/admin` before the `#`).
-4. Save each template.
+1. Open **Project configuration → Access & security → Visitors access → Identity → Emails**  
+   Direct link: https://app.netlify.com/projects/hodawellnessgroup/configuration/identity#emails
 
-After the next deploy, the site also auto-redirects Identity tokens from the homepage to `/admin`.
+2. Under **Email templates**, set each path (must match exactly):
+
+   | Email type      | Template path                      |
+   |-----------------|------------------------------------|
+   | Invitation      | `/email-templates/invite.html`     |
+   | Confirmation    | `/email-templates/confirmation.html` |
+   | Recovery        | `/email-templates/recovery.html`   |
+   | Email change    | `/email-templates/email-change.html` |
+
+3. Save. Test by requesting a password reset — the link should go to `/admin/#recovery_token=…`.
+
+> **Note:** Custom email templates require a **Netlify Pro** plan or higher ([docs](https://docs.netlify.com/manage/security/secure-access-to-sites/identity/identity-generated-emails/)). On the Free plan, the homepage auto-redirect (already deployed) handles reset links until you upgrade or edit templates in the UI if that option is available.
+
+Verify templates are live after deploy:  
+https://hodawellnessgroup.netlify.app/email-templates/recovery.html
 
 ### For the site owner (you)
 
