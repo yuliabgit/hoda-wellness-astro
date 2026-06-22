@@ -13,6 +13,7 @@
   --color-white: #FFFFFF;
   --color-banner-bg: #1C1C1A;
   --color-banner-text: #F7F4EF;
+  --announce-height: 44px;
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -136,6 +137,7 @@ p { margin: 0 0 1em; }
   color: var(--color-banner-text);
   font-size: 13px;
   position: relative;
+  z-index: 60;
 }
 .announce__inner {
   max-width: var(--container-max);
@@ -184,6 +186,9 @@ html.announce-dismissed #announcement { display: none; }
   top: 0;
   left: 0;
   right: 0;
+}
+html:not(.announce-dismissed) body:has(#announcement:not([hidden])) .site-header--transparent {
+  top: var(--announce-height);
 }
 .site-header--transparent .nav__link,
 .site-header--transparent .brand,
@@ -276,6 +281,10 @@ html.announce-dismissed #announcement { display: none; }
   color: var(--color-white);
   overflow: hidden;
   margin-top: -88px; /* pull under transparent header */
+  padding-top: 88px;
+}
+html:not(.announce-dismissed) body:has(#announcement:not([hidden])) .hero {
+  margin-top: 0;
   padding-top: 88px;
 }
 .hero__bg {

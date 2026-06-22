@@ -102,15 +102,6 @@ function resolveLink(link: string) {
     {
       activeAnnouncement && (
         <>
-          <script is:inline define:vars={{ announceId: activeAnnouncement.id }}>
-            try {
-              if (sessionStorage.getItem('hoda_ann_dismiss') === announceId) {
-                document.documentElement.classList.add('announce-dismissed');
-              }
-            } catch (e) {
-              /* no-op */
-            }
-          </script>
           <div class="announce" id="announcement" data-announce-id={activeAnnouncement.id}>
           <div class="announce__inner">
             {activeAnnouncement.text}
@@ -131,6 +122,17 @@ function resolveLink(link: string) {
             &times;
           </button>
         </div>
+          <script is:inline define:vars={{ announceId: activeAnnouncement.id }}>
+            try {
+              if (sessionStorage.getItem('hoda_ann_dismiss') === announceId) {
+                document.documentElement.classList.add('announce-dismissed');
+                var banner = document.getElementById('announcement');
+                if (banner) banner.hidden = true;
+              }
+            } catch (e) {
+              /* no-op */
+            }
+          </script>
         </>
       )
     }
