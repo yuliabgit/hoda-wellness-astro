@@ -85,8 +85,16 @@ function resolveLink(link: string) {
       rel="stylesheet"
     />
 
+    <script is:inline>
+      (function () {
+        if (!location.hash || location.pathname.startsWith('/admin')) return;
+        var hash = location.hash.slice(1);
+        if (/^(recovery_token|invite_token|confirmation_token|access_token|email_change_token)=/.test(hash)) {
+          location.replace('/admin/' + location.hash);
+        }
+      })();
+    </script>
     <script type="application/ld+json" set:html={jsonLdScript(schemas.length === 1 ? schemas[0] : { '@context': 'https://schema.org', '@graph': schemas })} />
-    <script src="/scripts/identity-redirect.js"></script>
   </head>
   <body>
     {
