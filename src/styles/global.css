@@ -165,6 +165,7 @@ p { margin: 0 0 1em; }
 }
 .announce__close:hover { opacity: 1; }
 .announce[hidden] { display: none; }
+html.announce-dismissed #announcement { display: none; }
 
 /* ============================================================
    Header / Nav

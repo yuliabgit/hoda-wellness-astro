@@ -44,7 +44,9 @@ if (structuredData) {
   schemas.push(...extra);
 }
 
-const activeAnnouncement = announcements.find((a) => a.active === true);
+const activeAnnouncement = announcements.find(
+  (a) => a.active === true || a.active === 'true',
+);
 
 function resolveLink(link: string) {
   return link
@@ -99,7 +101,17 @@ function resolveLink(link: string) {
   <body>
     {
       activeAnnouncement && (
-        <div class="announce" id="announcement" hidden>
+        <>
+          <script is:inline define:vars={{ announceId: activeAnnouncement.id }}>
+            try {
+              if (sessionStorage.getItem('hoda_ann_dismiss') === announceId) {
+                document.documentElement.classList.add('announce-dismissed');
+              }
+            } catch (e) {
+              /* no-op */
+            }
+          </script>
+          <div class="announce" id="announcement" data-announce-id={activeAnnouncement.id}>
           <div class="announce__inner">
             {activeAnnouncement.text}
             {activeAnnouncement.link && activeAnnouncement.linkText && (
@@ -119,6 +131,7 @@ function resolveLink(link: string) {
             &times;
           </button>
         </div>
+        </>
       )
     }
 

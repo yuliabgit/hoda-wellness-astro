@@ -10,19 +10,31 @@
     return Array.from((root || document).querySelectorAll(sel));
   }
 
-  function isAnnouncementDismissed() {
+  function isAnnouncementDismissed(announceId) {
+    if (!announceId) return false;
     try {
-      return (window.name || '').indexOf('hoda_ann_dismissed=1') !== -1;
+      if (sessionStorage.getItem('hoda_ann_dismiss') === announceId) return true;
+    } catch (e) {
+      /* sessionStorage unavailable */
+    }
+    try {
+      return (window.name || '').indexOf('hoda_ann_dismissed=' + announceId) !== -1;
     } catch (e) {
       return false;
     }
   }
 
-  function markAnnouncementDismissed() {
+  function markAnnouncementDismissed(announceId) {
+    if (!announceId) return;
     try {
-      if (!isAnnouncementDismissed()) {
-        window.name =
-          (window.name || '') + (window.name ? '|' : '') + 'hoda_ann_dismissed=1';
+      sessionStorage.setItem('hoda_ann_dismiss', announceId);
+    } catch (e) {
+      /* no-op */
+    }
+    try {
+      var flag = 'hoda_ann_dismissed=' + announceId;
+      if ((window.name || '').indexOf(flag) === -1) {
+        window.name = (window.name || '') + (window.name ? '|' : '') + flag;
       }
     } catch (e) {
       /* no-op */
@@ -33,7 +45,9 @@
     var banner = $('#announcement');
     if (!banner) return;
 
-    if (isAnnouncementDismissed()) {
+    var announceId = banner.getAttribute('data-announce-id');
+
+    if (isAnnouncementDismissed(announceId)) {
       banner.hidden = true;
       return;
     }
@@ -44,7 +58,7 @@
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
         banner.hidden = true;
-        markAnnouncementDismissed();
+        markAnnouncementDismissed(announceId);
       });
     }
   }
